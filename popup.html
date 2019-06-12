@@ -1,0 +1,71 @@
+<!-- Copyright 2017 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        - JavaScript and HTML must be in separate files: see our Content Security
+        - Policy documentation[1] for details and explanation.
+        -
+        - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+    -->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>HTTP Header Rules</title>
+
+    <!-- Required Stylesheets
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    -->
+    <link type="text/css" rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="bootstrap-vue-2.0.0-rc20-dist/css/bootstrap-vue.min.css" />
+
+    <!-- fontawsome CSS-->
+    <link type="text/css" rel="stylesheet" href="font-awesome-4.7.0-dist/css/font-awesome.min.css">
+    <!-- base CSS -->
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+
+    <!-- Required scripts 
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    -->
+    <script type="text/javascript" src="vue-2.6.10-dist/js/vue.js"></script>
+    <script type="text/javascript" src="bootstrap-vue-2.0.0-rc20-dist/js/bootstrap-vue.js"></script>
+
+</head>
+
+<body>
+    <!-- Our application root element -->
+    <div id="app">
+        <b-navbar toggleable="lg" type="dark" class="nav-bar">
+            <b-navbar-brand href="#"><img src='./img/hh32.png' id='title-image'>HTTP Header Rules</b-navbar-brand>
+            <b-button-group>
+                <b-button v-on:click="changeStatus" :variant="applicationActive ? 'success' : 'outline-success'">On</b-button>
+                <b-button v-on:click="changeStatus" :variant="!applicationActive ? 'danger' : 'outline-danger'">Off</b-button>
+            </b-button-group>
+        </b-navbar>
+        <b-container>
+            <b-tabs content-class="mt-3">
+                <b-tab v-for="tab in navTabs" v-bind:key="tab.id" v-bind:title="tab.title" v-bind:active="currentTab === tab.id" v-on:click="currentTab = tab.id">
+                    <component v-bind:is="getTabComponent" v-bind:fields="fields[tab.fields]" v-bind:items="tables[tab.name]"></component>
+                </b-tab>
+            </b-tabs>
+
+        </b-container>
+    </div>
+
+    <!-- Optional JavaScript -->
+
+    <!-- Start running your app -->
+    <script type="text/javascript" src="popup.js"></script>
+</body>
+
+</html>
+
+</html>
