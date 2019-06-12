@@ -4,17 +4,17 @@
 'use strict';
 
 function setX(event) {
-    let minutes = parseFloat(event.target.value);
-    chrome.browserAction.setBadgeText({ text: 'ON' });
+    let minutes = parseFloat(event.target.value)
+    chrome.browserAction.setBadgeText({ text: 'ON' })
     //chrome.alarms.create({delayInMinutes: minutes});
     //chrome.storage.sync.set({minutes: minutes});
-    window.close();
+    window.close()
 }
 
 function clearX() {
-    chrome.browserAction.setBadgeText({ text: '' });
+    chrome.browserAction.setBadgeText({ text: '' })
     //chrome.alarms.clearAll();
-    window.close();
+    window.close()
 }
 
 //An Event delay will fire
@@ -23,33 +23,16 @@ function clearX() {
 //document.getElementById('C').addEventListener('click', setX);
 //document.getElementById('D').addEventListener('click', clearX);
 
-
-Vue.component('dyntable', {
-    data: function() {
-        return {
-            selection: null
-        }
-    },
-    props: ['fields', 'items'],
-    template: ' \
-    <b-table striped hover :fields="fields" :items="items" selectable select-mode="single" selectVariant="info" @row-selected="select"> \
-    </b-table> \
-    ',
-    methods: {
-        select: function(item) {
-            alert(JSON.stringify(item))
-            this.$emit("select", this.selection)
-            this.selection = null
-            this._xx = item
-        }
-    }
-})
-
-window.app = new Vue({
-    el: '#app',
-    data: {
-        applicationActive: true,
+const store = new Vuex.Store({
+    state: {
+        applicationStateActive: true,
         currentTab: 1,
+        selections: {
+            hosts: 0,
+            rulesets: 0,
+            requests: 0,
+            responses: 0
+        },
         navTabs: [{
                 id: 1,
                 name: 'hosts',
@@ -138,40 +121,61 @@ window.app = new Vue({
                     isActive: true,
                     applyTo: 1,
                     order: 1,
-                    header: 'Content-Type',
+                    key: 'Content-Type',
                     value: 'text/html;charset=utf-8'
                 },
                 {
                     id: 2,
                     isActive: true,
-                    applyTo: 2,
+                    applyTo: 1,
                     order: 2,
-                    header: 'X-Content-Type-Options',
+                    key: 'X-Content-Type-Options',
                     value: ''
                 }
             ]
         }
     },
-    computed: {
-        getTabComponent: function() {
-            return 'dyntable'
-        }
+    mutations: {
+        applicationStateActive: (state, data) => { state.applicationStateActive = data },
+        currentTab: (state, data) => { state.currentTab = data },
+        selections: (state, data) => { Vue.set(state.selections, data.key, data.value) }
+    }
+  }
+)
 
-    },
+
+Vue.component('dynamic-table', {
+    props: ['name', 'fields', 'items'],
+    template: ' \
+    <b-table striped hover :name="name" :fields="fields" :items="items" selectable select-mode="single" selectVariant="info" @row-selected="select"> \
+    </b-table> \
+    ',
     methods: {
-        changeStatus: function() {
-            this.applicationActive = !this.applicationActive
-            alert(JSON.stringify(this.$data))
-        },
-        select: function(d) {
-            alert(d)
+        select: function(data) {
+            store.commit('selections', { key: this.name, value: data[0].id })
         }
-
     }
 })
 
-function debugOut(items) {
-    for (var i = 0; i < items.length; i++) {
-        alert('' + JSON.stringify(items[i]));
+window.app = new Vue({
+    el: '#app',
+    computed: {
+        applicationStateActive: () => store.state.applicationStateActive,
+        currentTab: () => store.state.currentTab,
+        selections: () => store.state.selections,
+        navTabs: () => store.state.navTabs,
+        fields: () => store.state.fields,
+        tables: () => store.state.tables,
+        getTabComponent: () => {
+            return 'dynamic-table'
+        }
+    },
+    methods: {
+        changeState: function() {
+            store.commit('applicationStateActive', !store.state.applicationStateActive)
+        },
+        storeCommit: function(key, value) {
+            store.commit(key, value)
+        }
     }
-}
+})

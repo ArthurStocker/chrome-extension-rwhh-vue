@@ -36,6 +36,7 @@ found in the LICENSE file. -->
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     -->
     <script type="text/javascript" src="vue-2.6.10-dist/js/vue.js"></script>
+    <script type="text/javascript" src="vuex-3.1.1-dist/js/vuex.js"></script>
     <script type="text/javascript" src="bootstrap-vue-2.0.0-rc20-dist/js/bootstrap-vue.js"></script>
 
 </head>
@@ -46,14 +47,18 @@ found in the LICENSE file. -->
         <b-navbar toggleable="lg" type="dark" class="nav-bar">
             <b-navbar-brand href="#"><img src='./img/hh32.png' id='title-image'>HTTP Header Rules</b-navbar-brand>
             <b-button-group>
-                <b-button v-on:click="changeStatus" :variant="applicationActive ? 'success' : 'outline-success'">On</b-button>
-                <b-button v-on:click="changeStatus" :variant="!applicationActive ? 'danger' : 'outline-danger'">Off</b-button>
+                <b-button v-on:click="changeState" :variant="applicationStateActive ? 'success' : 'outline-success'">On
+                </b-button>
+                <b-button v-on:click="changeState" :variant="!applicationStateActive ? 'danger' : 'outline-danger'">Off
+                </b-button>
             </b-button-group>
         </b-navbar>
         <b-container>
             <b-tabs content-class="mt-3">
-                <b-tab v-for="tab in navTabs" v-bind:key="tab.id" v-bind:title="tab.title" v-bind:active="currentTab === tab.id" v-on:click="currentTab = tab.id">
-                    <component v-bind:is="getTabComponent" v-bind:fields="fields[tab.fields]" v-bind:items="tables[tab.name]"></component>
+                <b-tab v-for="tab in navTabs" v-bind:key="tab.id" v-bind:title="tab.title"
+                    v-bind:active="currentTab === tab.id" v-on:click="storeCommit('currentTab', tab.id)">
+                    <component v-bind:is="getTabComponent" v-bind:name="tab.name" v-bind:fields="fields[tab.fields]"
+                        v-bind:items="tables[tab.name]"></component>
                 </b-tab>
             </b-tabs>
 
@@ -65,7 +70,5 @@ found in the LICENSE file. -->
     <!-- Start running your app -->
     <script type="text/javascript" src="popup.js"></script>
 </body>
-
-</html>
 
 </html>
