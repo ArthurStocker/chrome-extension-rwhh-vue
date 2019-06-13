@@ -1,22 +1,22 @@
 {
     "name": "HTTP Header Overwrite",
     "icons": {
-        "512": "img/hh512.png",
-        "256": "img/hh256.png",
-        "128": "img/hh128.png",
-        "48": "img/hh48.png",
-        "32": "img/hh32.png",
-        "16": "img/hh16.png"
+        "512": "assets/images/hh512.png",
+        "256": "assets/images/hh256.png",
+        "128": "assets/images/hh128.png",
+        "48": "assets/images/hh48.png",
+        "32": "assets/images/hh32.png",
+        "16": "assets/images/hh16.png"
     },
     "description": "Change the response content type",
     "manifest_version": 2,
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
-        "scripts": ["bgp.js"]
+        "scripts": ["lib/bgp.js"]
     },
     "browser_action": {
         "default_title": "HTTP Header Overwrite",
-        "default_popup": "popup.html"
+        "default_popup": "lib/popup.html"
     },
     "permissions": ["webRequest", "webRequestBlocking", "*://*/*"],
     "version": "0.1"

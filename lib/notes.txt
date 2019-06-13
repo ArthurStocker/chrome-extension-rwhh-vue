@@ -1,0 +1,20 @@
+
+function setX(event) {
+    let minutes = parseFloat(event.target.value)
+    chrome.browserAction.setBadgeText({ text: 'ON' })
+        //chrome.alarms.create({delayInMinutes: minutes});
+        //chrome.storage.sync.set({minutes: minutes});
+    window.close()
+}
+
+function clearX() {
+    chrome.browserAction.setBadgeText({ text: '' })
+        //chrome.alarms.clearAll();
+    window.close()
+}
+
+//An Event delay will fire
+//document.getElementById('A').addEventListener('click', setX);
+//document.getElementById('B').addEventListener('click', setX);
+//document.getElementById('C').addEventListener('click', setX);
+//document.getElementById('D').addEventListener('click', clearX);
