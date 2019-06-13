@@ -9,18 +9,18 @@
 </template>
 
 <script>
-  module.exports = {
-    name: 'nav-bar',
-    computed: {
-      applicationStateActive: () => store.state.applicationStateActive
+module.exports = {
+  name: 'app-bar',
+  computed: {
+    applicationStateActive: () => store.state.applicationStateActive
+  },
+  methods: {
+    changeState: function () {
+      store.commit('applicationStateActive', !store.state.applicationStateActive)
     },
-    methods: {
-      changeState: function() {
-          store.commit('applicationStateActive', !store.state.applicationStateActive)
-      },
-      storeCommit: function(key, value) {
-          store.commit(key, value)
-      }
+    storeCommit: function (key, value) {
+      store.commit(key, value)
     }
   }
+}
 </script>
