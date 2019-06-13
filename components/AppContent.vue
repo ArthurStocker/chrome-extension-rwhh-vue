@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <b-tabs content-class="mt-3">
-      <b-tab v-for="tab in navTabs" v-bind:key="tab.id" v-bind:title="tab.title" v-bind:active="currentTab === tab.id" v-on:click="storeCommit('currentTab', tab.id)">
-        <component v-bind:is="getTabComponent" v-bind:name="tab.name" v-bind:fields="fields[tab.fields]" v-bind:items="tables[tab.name]"></component>
+      <b-tab v-for="table in definitions" v-bind:key="table.id" v-bind:title="table.title" v-bind:active="activeTable === table.id" v-on:click="storeCommit('activeTable', table.id)">
+        <component v-bind:is="getTableComponent" v-bind:name="table.name" v-bind:fields="fields[table.fields]" v-bind:items="tables[table.name]"></component>
       </b-tab>
     </b-tabs>
   </b-container>
@@ -12,11 +12,11 @@
   module.exports = {
     name: 'app-content',
     computed: {
-        currentTab: () => store.state.currentTab,
-        navTabs: () => store.state.navTabs,
+        activeTable: () => store.state.activeTable,
+        definitions: () => store.state.definitions,
         fields: () => store.state.fields,
         tables: () => store.state.tables,
-        getTabComponent: () => {
+        getTableComponent: () => {
             return 'dynamic-table'
         }
     },

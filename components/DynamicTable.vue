@@ -8,7 +8,7 @@
     props: ['name', 'fields', 'items'],
     methods: {
       select: function(data) {
-          store.commit('selections', { key: this.name, value: data[0].id })
+          store.commit('selections', { key: this.name, value: (data && data.length == 1 ? data[0].id : null )})
       }
     }
   }
