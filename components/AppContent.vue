@@ -13,8 +13,8 @@ module.exports = {
   name: 'app-content',
   computed: {
     activeComponent: () => store.state.activeComponent,
-    datasets: () => store.state.datasets,
-    selections: () => store.state.selections
+    selections: () => store.state.selections,
+    datasets: () => store.state.datasets
   },
   methods: {
     storeCommit: (key, value) => {
