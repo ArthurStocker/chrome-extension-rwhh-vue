@@ -12,7 +12,7 @@ module.exports = {
   name: 'conditional-table',
   props: ['name', 'definition', 'records', 'filter'],
   computed: {
-    editable() { return !this.$store.state.applicationStateActive }
+    editable() { return this.$store.state.editable }
   },
   methods: {
     valueTransformer(tagtype, key, record) {
