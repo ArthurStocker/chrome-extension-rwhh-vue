@@ -12,12 +12,19 @@
     "manifest_version": 2,
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
-        "scripts": ["lib/bgp.js"]
+        "scripts": [
+            "lib/bgp.js"
+        ]
     },
     "browser_action": {
         "default_title": "HTTP Header Overwrite",
-        "default_popup": "lib/popup.html"
+        "default_popup": "popup.html"
     },
-    "permissions": ["webRequest", "webRequestBlocking", "*://*/*"],
+    "permissions": [
+        "storage",
+        "webRequest",
+        "webRequestBlocking",
+        "*://*/*"
+    ],
     "version": "0.1"
 }
