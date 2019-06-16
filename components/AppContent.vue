@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <b-tabs content-class="mt-3">
-      <b-tab v-for="dataset in datasets" v-bind:key="dataset.id" v-bind:title="dataset.title" v-bind:active="activeComponent === dataset.id" v-on:click="storeCommit('setActiveComponent', dataset.id)">
-        <component v-bind:is="dataset.type" v-bind:name="dataset.name" v-bind:definition="dataset.definition" v-bind:records="dataset.records" v-bind:filter="selections[dataset.filterrule.basedon.dataset]"></component>
+      <b-tab v-for="dataset in datasets" :key="dataset.id" :title="dataset.title" :active="activeComponent === dataset.id" @click="storeCommit('setActiveComponent', dataset.id)">
+        <component :is="dataset.type" :name="dataset.name" :definition="dataset.definition" :records="dataset.records" :filter="selections[dataset.filterrule.basedon.dataset]"></component>
       </b-tab>
     </b-tabs>
   </b-container>
