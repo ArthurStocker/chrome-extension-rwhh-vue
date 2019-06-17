@@ -1,5 +1,7 @@
 <template>
-  <span :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" @dblclick="storeCommitEvent">{{ records.item[field] }}</span>
+  <b-input-group size="sm">
+    <span class="form-control ctrl-transparent" :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" @dblclick="storeCommitEvent">{{ records.item[field] }}</span>
+  </b-input-group>
 </template>
 
 <script>

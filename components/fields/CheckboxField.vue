@@ -1,6 +1,9 @@
 <template>
-  <i v-if="['checkbox'].indexOf(records.field.type) != -1 && valueTransformer('checkbox', field, records)" :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" @dblclick="storeCommitEvent" class="fas fa-toggle-on"></i>
-  <i v-else-if="['checkbox'].indexOf(records.field.type) != -1 && !valueTransformer('checkbox', field, records)" :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" @dblclick="storeCommitEvent" class="fas fa-toggle-off"></i>
+  <div class="custom-control custom-switch form-control-sm">
+    <input type="checkbox" name="hosts-0-isActive" disabled="disabled" autocomplete="off" class="custom-control-input" :checked="valueTransformer('checkbox', field, records)">
+    <label class="custom-control-label" :key="field" :name="name + '-' + records.index + '-' + field" :data-dataset="name" :data-row="records.index" :data-col="field" @dblclick="storeCommitEvent">
+    </label>
+  </div>
 </template>
 
 <script>
