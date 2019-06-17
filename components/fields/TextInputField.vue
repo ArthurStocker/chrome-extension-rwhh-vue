@@ -1,10 +1,10 @@
 
 <template>
   <!--<i :data-dataset="name" :data-row="records.index" :data-col="field" @click="storeCommitEvent" class="far fa-check-circle"><input :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" :type="records.field.type" :value="valueTransformer('text', field, records)" :disabled="!editable" @input="storeCommitEvent" @dblclick="storeCommitEvent" class="form-control" /></i>-->
-  <b-input-group size="sm" class="mt-1">
+  <b-input-group size="sm">
     <b-form-input :key="field" :data-dataset="name" :data-row="records.index" :data-col="field" :type="records.field.type" :value="valueTransformer('text', field, records)" :disabled="!editable" @input="storeCommitEvent"></b-form-input>
     <b-input-group-append>
-      <b-button @click="storeCommitEvent" size="sm" variant="outline-primary">
+      <b-button :data-dataset="name" :data-row="records.index" :data-col="field" @click="storeCommitEvent" size="sm" variant="outline-primary">
         <i :data-dataset="name" :data-row="records.index" :data-col="field" class="far fa-check-circle"></i>
       </b-button>
     </b-input-group-append>
