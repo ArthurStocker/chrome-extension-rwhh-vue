@@ -1,14 +1,16 @@
 <template>
   <b-navbar toggleable="lg" type="dark" class="nav-bar">
     <b-navbar-brand href="#"><img src='./assets/images/hh32.png' id='title-image'>HTTP Header Rules</b-navbar-brand>
-    <b-nav-text>
-      Edit
-      <i v-if="editable" @click="storeCommit('editable')" style="color: green" class="fas fa-toggle-on"></i>
-      <i v-else @click="storeCommit('editable')" style="color: red" class="fas fa-toggle-off"></i>
-      Active
-      <i v-if="applicationState" @click="storeCommit('toggleApplicationState')" style="color: green" class="fas fa-toggle-on"></i>
-      <i v-else @click="storeCommit('toggleApplicationState')" style="color: red" class="fas fa-toggle-off"></i>
-    </b-nav-text>
+    <b-nav-form>
+      <b-nav-text>
+        Edit&nbsp;
+      </b-nav-text>
+      <checkbox-field :name="'edit-isEnabled'" :record="{index: 0, field: { type: 'checkbox'}, item: { id: editable} }" :field="'id'" :methods="['editable']"></checkbox-field>
+      <b-nav-text>
+        Active&nbsp;
+      </b-nav-text>
+      <checkbox-field :name="'state-isEnabled'" :record="{index: 0, field: { type: 'checkbox'}, item: { id: applicationState} }" :field="'id'" :methods="['toggleApplicationState']"></checkbox-field>
+    </b-nav-form>
   </b-navbar>
 </template>
 
