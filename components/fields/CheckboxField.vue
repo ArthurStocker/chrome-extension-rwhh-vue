@@ -1,21 +1,35 @@
 <template>
-  <div class="custom-control custom-switch form-control-sm">
-    <input class="custom-control-input" type="checkbox" name="hosts-0-isActive" :disabled="name.indexOf('isEnabled') == -1 ? 'disabled' : false " :checked="valueTransformer('checkbox', record, field)" autocomplete="off">
-    <label class="custom-control-label" :key="field" :name="name + '-' + record.index + '-' + field" :data-name="name" :data-row="record.index" :data-col="field" :data-methods="methods" @dblclick="storeCommitEvent"></label>
-  </div>
+  <b-input-group size="sm" @dblclick="storeCommitEvent">
+    <b-form-checkbox :key="record.field.key" :name="name + '-' + record.index + '-' + record.field.key" :checked="valueTransformer('checkbox', record)" :disabled="(record.field.isEnabled !== record.index || !enabled) && name.indexOf('isEnabled') === -1" size="sm" switch @input="storeCommitEvent"></b-form-checkbox>
+    <b-input-group-append v-if="log(record.field.isEnabled, record.index) && enabled">
+      <b-button @click="storeCommitEvent" size="sm" variant="outline-primary" style="border-radius: 0.2rem;">
+        <i class="far fa-check-circle"></i>
+      </b-button>
+    </b-input-group-append>
+  </b-input-group>
 </template>
-
+    
 <script>
 module.exports = {
   name: 'checkbox-field',
-  props: ['name', 'record', 'field', 'methods'],
+  props: ['name', 'record'],
+  computed: {
+    enabled() { return this.$store.state.isEnabled }
+  },
   methods: {
-    valueTransformer(tag, record, field) {
-      return tag == record.field.type ? record.item[field] : null
+    log(v1, v2) {
+      console.log('checkbox is ' + (v1 === v2 ? 'editable' : 'Not editable'), v1, v2 )
+      return v1 === v2
+    },
+    valueTransformer(tagtype, record) {
+      return tagtype == record.field.type ? record.item[record.field.key] : null
     },
     storeCommitEvent(event) {
-      if (event.type == 'dblclick')
-        this.$store.commit(event.target.dataset.methods.split(',')[0], { dataset: event.target.dataset.name, row: event.target.dataset.row, col: event.target.dataset.col, value: null })
+      if (typeof event != 'object') 
+        this.$store.commit(JSON.parse(this.record.field.methods)['input'], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })
+      if (event.type && JSON.parse(this.record.field.methods)[event.type])
+        this.$store.commit(JSON.parse(this.record.field.methods)[event.type], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })
+        //console.log('cf >>', event, typeof event)
     }
   }
 }

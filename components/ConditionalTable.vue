@@ -1,7 +1,7 @@
 <template>
-  <b-table :name="name" :fields="definition" :items="records" :filter="filter" striped hover selectable select-mode="single" selectVariant="info" @row-selected="select" class="md">
+  <b-table :name="name" :fields="definition" :items="records" :filter="filter" striped hover :selectable="!enabled" select-mode="single" selectVariant="info" @row-selected="select" class="md">
     <template v-for="key in definition.map((field) => field.key)" :slot="key" slot-scope="records">
-      <component :is="records.field.type + (records.field.editable == records.index ? '-input' : '') + '-field'" :key="key" :name="name" :record="records" :field="key" :methods="['editRecord', 'updateRecord', 'deleteRecord']"></component>
+      <component :is="records.field.type + '-field'" :key="key" :name="name" :record="records"></component>
     </template>
   </b-table>
 </template>
@@ -10,6 +10,9 @@
 module.exports = {
   name: 'conditional-table',
   props: ['name', 'definition', 'records', 'filter'],
+  computed: {
+    enabled() { return this.$store.state.isEnabled }
+  },
   methods: {
     select(data) {
       var self = this

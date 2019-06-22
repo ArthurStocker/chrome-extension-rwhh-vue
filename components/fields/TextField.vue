@@ -1,17 +1,31 @@
+
 <template>
-  <b-input-group size="sm">
-    <span class="form-control ctrl-transparent" :key="field" :data-name="name" :data-row="record.index" :data-col="field" :data-methods="methods" @dblclick="storeCommitEvent">{{ record.item[field] }}</span>
+  <b-input-group size="sm" @dblclick="storeCommitEvent">
+    <b-form-input :key="record.field.key" :type="record.field.type" :value="valueTransformer('text', record)" :disabled="record.field.isEnabled !== record.index || !enabled" :class="record.field.isEnabled !== record.index || !enabled ? 'ctrl-transparent' : ''" @input="storeCommitEvent"></b-form-input>
+    <b-input-group-append v-if="record.field.isEnabled === record.index && enabled">
+      <b-button @click="storeCommitEvent" variant="outline-primary">
+        <i class="far fa-check-circle"></i>
+      </b-button>
+    </b-input-group-append>
   </b-input-group>
 </template>
 
 <script>
 module.exports = {
-  name: 'text-field',
-  props: ['name', 'record', 'field', 'methods'],
+  name: 'text-input-field',
+  props: ['name', 'record'],
+  computed: {
+    enabled() { return this.$store.state.isEnabled }
+  },
   methods: {
+    valueTransformer(tagtype, record) {
+      return tagtype == record.field.type ? record.item[record.field.key] : null
+    },
     storeCommitEvent(event) {
-      if (event.type == 'dblclick')
-        this.$store.commit(event.target.dataset.methods.split(',')[0], { dataset: event.target.dataset.name, row: event.target.dataset.row, col: event.target.dataset.col, value: '' })
+      if (typeof event != 'object') 
+        this.$store.commit(JSON.parse(this.record.field.methods)['input'], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })
+      if (event.type && JSON.parse(this.record.field.methods)[event.type])
+        this.$store.commit(JSON.parse(this.record.field.methods)[event.type], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })
     }
   }
 }

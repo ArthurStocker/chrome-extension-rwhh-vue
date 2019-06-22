@@ -2,14 +2,12 @@
   <b-navbar toggleable="lg" type="dark" class="nav-bar">
     <b-navbar-brand href="#"><img src='./assets/images/hh32.png' id='title-image'>HTTP Header Rules</b-navbar-brand>
     <b-nav-form>
-      <b-nav-text>
-        Edit&nbsp;
-      </b-nav-text>
-      <checkbox-field :name="'edit-isEnabled'" :record="{index: 0, field: { type: 'checkbox'}, item: { id: editable} }" :field="'id'" :methods="['editable']"></checkbox-field>
-      <b-nav-text>
-        Active&nbsp;
-      </b-nav-text>
-      <checkbox-field :name="'state-isEnabled'" :record="{index: 0, field: { type: 'checkbox'}, item: { id: applicationState} }" :field="'id'" :methods="['toggleApplicationState']"></checkbox-field>
+      <div :key="config.name" v-for="config in configs">
+        <b-nav-text>
+          {{ config.title }}&nbsp;
+        </b-nav-text>
+        <checkbox-field :name="config.name" :record="config"></checkbox-field>
+      </div>
     </b-nav-form>
   </b-navbar>
 </template>
@@ -19,7 +17,16 @@ module.exports = {
   name: 'app-bar',
   computed: {
     applicationState() { return this.$store.state.applicationStateActive },
-    editable() { return this.$store.state.editable }
+    enabled() { return this.$store.state.isEnabled },
+    configs() { return this.$store.state.appconfig.map((item, index) => { 
+          item.index = index
+          item.item = {}
+          item.item[item.field.key] = this.$store.state[item.field.key]
+          console.log('config -->>', item)
+          return item
+        } 
+      )
+    }
   },
   methods: {
     storeCommit(key, value) {
