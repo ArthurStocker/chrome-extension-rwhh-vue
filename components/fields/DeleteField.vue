@@ -10,7 +10,7 @@ module.exports = {
   props: ['name', 'record'],
   methods: {
     storeCommitEvent(event) {
-      if (typeof event != 'object') 
+      if (typeof event != 'object')
         this.$store.commit(JSON.parse(this.record.field.methods)['input'], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })
       if (event.type && JSON.parse(this.record.field.methods)[event.type])
         this.$store.commit(JSON.parse(this.record.field.methods)[event.type], { dataset: this.name, row: this.record.index, col: this.record.field.key, value: event })

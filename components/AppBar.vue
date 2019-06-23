@@ -18,13 +18,12 @@ module.exports = {
   computed: {
     applicationState() { return this.$store.state.applicationStateActive },
     enabled() { return this.$store.state.isEnabled },
-    configs() { return this.$store.state.appconfig.map((item, index) => { 
-          item.index = index
-          item.item = {}
-          item.item[item.field.key] = this.$store.state[item.field.key]
-          console.log('config -->>', item)
-          return item
-        } 
+    configs() {      return this.$store.state.appconfig.map((item, index) => {
+        item.index = index
+        item.item = {}
+        item.item[item.field.key] = this.$store.state[item.field.key]
+        return item
+      }
       )
     }
   },

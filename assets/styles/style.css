@@ -17,7 +17,7 @@ body {
 
 .container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     max-width: 800px;
     margin: 0px;
     padding: 10px 0px 0px 0px;
@@ -46,7 +46,7 @@ body {
 }
 
 .ctrl-transparent {
-    background-color: #fff0;
+    background-color: #fff0 !important;
     border: 1px solid #ced4da00;
 }
 
