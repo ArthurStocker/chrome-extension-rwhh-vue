@@ -50,82 +50,88 @@ body {
     border: 1px solid #ced4da00;
 }
 
-.x-w5 { 
-    max-width: 5px; 
+.ctrl-newrecord {
+    color: darkgrey;
+    font-style: italic;
+    font-weight: normal;
 }
 
-.x-w10 { 
-    max-width: 10px; 
+.x-w5 {
+    max-width: 5px;
 }
 
-.x-w15 { 
-    max-width: 15px; 
+.x-w10 {
+    max-width: 10px;
 }
 
-.x-w20 { 
-    max-width: 20px; 
+.x-w15 {
+    max-width: 15px;
 }
 
-.x-w25 { 
-    max-width: 25px; 
+.x-w20 {
+    max-width: 20px;
 }
 
-.x-w30 { 
-    max-width: 30px; 
+.x-w25 {
+    max-width: 25px;
 }
 
-.x-w35 { 
-    max-width: 35px; 
+.x-w30 {
+    max-width: 30px;
 }
 
-.x-w40 { 
-    max-width: 40px; 
+.x-w35 {
+    max-width: 35px;
 }
 
-.x-w45 { 
-    max-width: 45px; 
+.x-w40 {
+    max-width: 40px;
 }
 
-.x-w50 { 
-    max-width: 50px; 
+.x-w45 {
+    max-width: 45px;
 }
 
-.x-w55 { 
-    max-width: 55px; 
+.x-w50 {
+    max-width: 50px;
 }
 
-.x-w60 { 
-    max-width: 60px; 
+.x-w55 {
+    max-width: 55px;
 }
 
-.x-w65 { 
-    max-width: 65px; 
+.x-w60 {
+    max-width: 60px;
 }
 
-.x-w70 { 
-    max-width: 70px; 
+.x-w65 {
+    max-width: 65px;
 }
 
-.x-w75 { 
-    max-width: 75px; 
+.x-w70 {
+    max-width: 70px;
 }
 
-.x-w80 { 
-    max-width: 80px; 
+.x-w75 {
+    max-width: 75px;
 }
 
-.x-w85 { 
-    max-width: 85px; 
+.x-w80 {
+    max-width: 80px;
 }
 
-.x-w90 { 
-    max-width: 90px; 
+.x-w85 {
+    max-width: 85px;
 }
 
-.x-w95 { 
-    max-width: 95px; 
+.x-w90 {
+    max-width: 90px;
 }
 
-.x-w100 { 
-    max-width: 100px; 
+.x-w95 {
+    max-width: 95px;
+}
+
+.x-w100 {
+    max-width: 100px;
 }

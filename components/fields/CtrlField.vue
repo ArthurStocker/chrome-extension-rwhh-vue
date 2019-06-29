@@ -1,12 +1,12 @@
 <template>
   <b-input-group size="sm">
-    <i class="fas fa-eraser form-control ctrl-transparent" :key="record.field.key" @click="storeCommitEvent">{{ record.item[record.field.key] }}</i>
+    <i :class="'fas ' + (record.isnew ? 'fa-save' : 'fa-eraser') + ' form-control ctrl-transparent'" :key="record.field.key" @click="storeCommitEvent">{{ record.item[record.field.key] }}</i>
   </b-input-group>
 </template>
 
 <script>
 module.exports = {
-  name: 'delete-input-field',
+  name: 'ctrl-field',
   props: ['name', 'record'],
   methods: {
     storeCommitEvent(event) {
