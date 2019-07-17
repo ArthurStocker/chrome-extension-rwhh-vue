@@ -40,9 +40,7 @@ module.exports = {
       return v
     },
     addRecord(event) {
-      console.log('-->>', event)
       this.definition.map((field) => { Vue.set(this.newRecord, field.key, field.type == 'ctrl' ? '' : field.key) })
-
     },
     addField(data,i) {
       return { index: this.records.length, field: data.fields[i], item: this.newRecord, isnew:true }
